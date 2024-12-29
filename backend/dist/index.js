@@ -51,15 +51,23 @@ dotenv.config();
 // const cors = require("cors");
 // const { Server } = require("socket.io");
 const PORT = process.env.PORT || 5001;
-app.use((0, cors_1.default)({ origin: "http://localhost:5173", credentials: true }));
+app.use((0, cors_1.default)({
+    origin: [
+        "http://localhost:5173",
+        "https://copy-paste-frontend.vercel.app/"
+    ],
+    credentials: true
+}));
 const server = http.createServer(app);
 app.all("/api/auth/*", (0, node_1.toNodeHandler)(auth_1.auth));
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
 const ioOptions = {
     cors: {
-        origin: "http://localhost:5173",
-        // origin: "https://chatapp.stealthcode.site",
+        origin: [
+            "http://localhost:5173",
+            "https://copy-paste-frontend.vercel.app/"
+        ],
         methods: ["GET", "POST"]
     }
 };

@@ -42,7 +42,10 @@ exports.auth = (0, better_auth_1.betterAuth)({
     emailAndPassword: {
         enabled: true
     },
-    trustedOrigins: ["http://localhost:5173"],
+    trustedOrigins: [
+        "http://localhost:5173",
+        "https://copy-paste-frontend.vercel.app/"
+    ],
     socialProviders: {
         google: {
             clientId: process.env.GOOGLE_CLIENT_ID,
