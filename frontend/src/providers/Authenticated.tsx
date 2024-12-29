@@ -1,20 +1,24 @@
 import { Outlet, useNavigate } from "react-router";
 import { useSession } from "../lib/auth-client";
+import { useEffect } from "react";
 
 const Authenticated = () => {
   const navigate = useNavigate();
   const { data, isPending, error } = useSession();
-  console.log(error, isPending);
+  useEffect(() => {
+    if (error) {
+      navigate("/login");
+    }
+    if (data?.user == null) {
+      navigate("/login");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data, isPending, error]);
+  // console.log(error, isPending);
   if (isPending) {
     return <p>loading....</p>;
   }
-  if (error) {
-    navigate("/login");
-  }
-  if (data?.user == null) {
-    navigate("/login");
-  }
-  
+
   return (
     <main>
       <Outlet />
