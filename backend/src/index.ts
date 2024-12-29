@@ -9,20 +9,28 @@ import * as http from "http";
 // import { Server} from "socket.io";
 import cors from "cors";
 import { Server as SocketIOServer } from "socket.io";
+import * as dotenv from "dotenv";
 const app: Application = express();
 
+import { toNodeHandler } from "better-auth/node";
+import { auth } from "./utils/auth";
+dotenv.config();
 // const http = require("http");
 // const cors = require("cors");
 // const { Server } = require("socket.io");
 const PORT = process.env.PORT || 5001;
-app.use(cors());
+app.use(cors({ origin: "http://localhost:5173", credentials: true }));
+
 const server = http.createServer(app);
+app.all("/api/auth/*", toNodeHandler(auth));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+
+
 const ioOptions: Partial<ServerOptions> = {
   cors: {
-    origin: "http://localhost:3000",
+    origin: "http://localhost:5173",
     // origin: "https://chatapp.stealthcode.site",
     methods: ["GET", "POST"]
   }
