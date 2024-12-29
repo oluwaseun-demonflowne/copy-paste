@@ -35,10 +35,12 @@ var __importStar = (this && this.__importStar) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.auth = void 0;
 const better_auth_1 = require("better-auth");
+const plugins_1 = require("better-auth/plugins");
 const dotenv = __importStar(require("dotenv"));
 dotenv.config();
 exports.auth = (0, better_auth_1.betterAuth)({
     //...other options
+    plugins: [(0, plugins_1.multiSession)()],
     emailAndPassword: {
         enabled: true
     },

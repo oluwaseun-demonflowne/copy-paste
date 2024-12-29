@@ -1,9 +1,11 @@
 import { betterAuth } from "better-auth";
+import { multiSession } from "better-auth/plugins";
 import * as dotenv from "dotenv";
 dotenv.config();
 
 export const auth = betterAuth({
   //...other options
+  plugins: [multiSession()],
   emailAndPassword: {
     enabled: true
   },
