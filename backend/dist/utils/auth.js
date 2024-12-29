@@ -58,10 +58,7 @@ exports.auth = (0, better_auth_1.betterAuth)({
         //    }
     },
     advanced: {
-        crossSubDomainCookies: {
-            enabled: true,
-            domain: "https://copy-paste-frontend.vercel.app/"
-        }
+        defaultCookieAttributes: { sameSite: "none", secure: true }
     },
     session: {
         expiresIn: 60 * 60 * 24 * 7, // 7 days
