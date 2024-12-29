@@ -1,6 +1,8 @@
+import { customSessionClient } from "better-auth/client/plugins";
 import { createAuthClient } from "better-auth/react";
 export const { useSession } = createAuthClient({
   fetchOptions: { credentials: "include" },
+  plugins:[customSessionClient()],
   baseURL:
     process.env.NODE_ENV === "production"
       ? "https://copy-paste-8sxg.onrender.com"
