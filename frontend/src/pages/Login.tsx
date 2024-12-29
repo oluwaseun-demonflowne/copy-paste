@@ -6,9 +6,11 @@ const Login = () => {
   const signIn = async () => {
     const data = await authClient.signIn.social({
       provider: "google",
-      
       fetchOptions: {
-        baseURL: "http://localhost:5001/api/auth",
+        baseURL:
+          process.env.NODE_ENV === "production"
+            ? "https://copy-paste-8sxg.onrender.com"
+            : "http://localhost:5001",
         onError: (error) => {
           console.log("error hahah");
           console.log(error.error);
