@@ -21,10 +21,7 @@ dotenv.config();
 const PORT = process.env.PORT || 5001;
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173",
-      "https://copy-paste-frontend.vercel.app"
-    ],
+    origin: ["http://localhost:5173", "https://copy-paste-frontend.vercel.app"],
     credentials: true
   })
 );
@@ -36,10 +33,8 @@ app.use(express.urlencoded({ extended: true }));
 
 const ioOptions: Partial<ServerOptions> = {
   cors: {
-    origin: [
-      "http://localhost:5173",
-      "https://copy-paste-frontend.vercel.app"
-    ],
+    origin: ["http://localhost:5173", "https://copy-paste-frontend.vercel.app"],
+    credentials: true,
     methods: ["GET", "POST"]
   }
 };

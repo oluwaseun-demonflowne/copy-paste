@@ -52,10 +52,7 @@ dotenv.config();
 // const { Server } = require("socket.io");
 const PORT = process.env.PORT || 5001;
 app.use((0, cors_1.default)({
-    origin: [
-        "http://localhost:5173",
-        "https://copy-paste-frontend.vercel.app"
-    ],
+    origin: ["http://localhost:5173", "https://copy-paste-frontend.vercel.app"],
     credentials: true
 }));
 const server = http.createServer(app);
@@ -64,10 +61,8 @@ app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
 const ioOptions = {
     cors: {
-        origin: [
-            "http://localhost:5173",
-            "https://copy-paste-frontend.vercel.app"
-        ],
+        origin: ["http://localhost:5173", "https://copy-paste-frontend.vercel.app"],
+        credentials: true,
         methods: ["GET", "POST"]
     }
 };
