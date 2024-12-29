@@ -33,8 +33,7 @@ export const auth = betterAuth({
     defaultCookieAttributes: {
       httpOnly: true,
       sameSite: "none",
-      secure: false,
-
+      secure: true
     }
   },
   session: {
