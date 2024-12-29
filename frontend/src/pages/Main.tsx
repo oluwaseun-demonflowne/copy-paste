@@ -1,22 +1,26 @@
-// import { createAuthClient } from "better-auth/react";
-
 import { useSession } from "../lib/auth-client";
 
-
-
-// import { authClient } from "../lib/auth-client";
-
 const Main = () => {
-  // const session = await authClient.getSession()
-  
-  // const { useSession } = authClient();
-  const {
-    data
-    // isPending, //loading state
-    // error //error object
-  } = useSession();
-  console.log(data?.user);
-  return <div>main page</div>;
+  const { data } = useSession();
+  return (
+    <div>
+      <img
+        src={data!.user!.image!}
+        alt="user image"
+        style={{ width: "70px", borderRadius: "50%" }}
+      />
+      <h3>{data?.user.email}</h3>
+
+      <input
+        style={{
+          outline: "none",
+          height: "40px",
+          fontSize: "16px",
+          width: "290px"
+        }}
+      />
+    </div>
+  );
 };
 
 export default Main;
