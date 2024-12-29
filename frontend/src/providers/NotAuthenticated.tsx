@@ -6,7 +6,7 @@ const NotAuthenticated = () => {
   const navigate = useNavigate();
   const { data, isPending, error } = useSession();
   useEffect(() => {
-    if (data?.user !== null) {
+    if (data?.user !== undefined) {
       navigate("/", { replace: true });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

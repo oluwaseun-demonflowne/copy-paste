@@ -9,7 +9,7 @@ const Authenticated = () => {
     if (error) {
       navigate("/login");
     }
-    if (data?.user == null) {
+    if (data === null) {
       navigate("/login");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
