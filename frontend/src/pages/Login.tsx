@@ -7,6 +7,7 @@ const Login = () => {
     const data = await authClient.signIn.social({
       provider: "google",
       fetchOptions: {
+        credentials: "include",
         baseURL:
           process.env.NODE_ENV === "production"
             ? "https://copy-paste-8sxg.onrender.com/api/auth"
