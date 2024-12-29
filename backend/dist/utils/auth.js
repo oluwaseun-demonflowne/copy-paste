@@ -44,7 +44,7 @@ exports.auth = (0, better_auth_1.betterAuth)({
     },
     trustedOrigins: [
         "http://localhost:5173",
-        "https://copy-paste-frontend.vercel.app/"
+        "https://copy-paste-frontend.vercel.app"
     ],
     socialProviders: {
         google: {

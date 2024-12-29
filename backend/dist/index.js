@@ -54,7 +54,7 @@ const PORT = process.env.PORT || 5001;
 app.use((0, cors_1.default)({
     origin: [
         "http://localhost:5173",
-        "https://copy-paste-frontend.vercel.app/"
+        "https://copy-paste-frontend.vercel.app"
     ],
     credentials: true
 }));
@@ -66,7 +66,7 @@ const ioOptions = {
     cors: {
         origin: [
             "http://localhost:5173",
-            "https://copy-paste-frontend.vercel.app/"
+            "https://copy-paste-frontend.vercel.app"
         ],
         methods: ["GET", "POST"]
     }
