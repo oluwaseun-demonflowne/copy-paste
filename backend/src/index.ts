@@ -22,7 +22,8 @@ const PORT = process.env.PORT || 5001;
 app.use(
   cors({
     origin: ["http://localhost:5173", "https://copy-paste-frontend.vercel.app"],
-    credentials: true
+    credentials: true,
+    allowedHeaders: ["Content-Type", "Authorization"]
   })
 );
 
@@ -35,7 +36,8 @@ const ioOptions: Partial<ServerOptions> = {
   cors: {
     origin: ["http://localhost:5173", "https://copy-paste-frontend.vercel.app"],
     credentials: true,
-    methods: ["GET", "POST"]
+    methods: ["GET", "POST"],
+    allowedHeaders: ["Content-Type", "Authorization"]
   }
 };
 
