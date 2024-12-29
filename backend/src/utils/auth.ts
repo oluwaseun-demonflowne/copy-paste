@@ -23,8 +23,13 @@ export const auth = betterAuth({
     //     clientSecret: process.env.GITHUB_CLIENT_SECRET,
     //    }
   },
+  advanced: {
+    crossSubDomainCookies: {
+      enabled: true,
+      domain: "https://copy-paste-frontend.vercel.app/"
+    }
+  },
   session: {
-    
     expiresIn: 60 * 60 * 24 * 7, // 7 days
     updateAge: 60 * 60 * 24 // 1 day (every 1 day the session expiration is updated)
   }
