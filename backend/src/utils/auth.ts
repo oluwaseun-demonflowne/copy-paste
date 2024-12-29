@@ -17,7 +17,11 @@ export const auth = betterAuth({
     google: {
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-      flowName: "GeneralOAuthFlow"
+      flowName: "GeneralOAuthFlow",
+      prompt: "consent",
+      access_type: "offline",
+      response_type: "code",
+      eventType: "admin"
     }
 
     //    github: {
