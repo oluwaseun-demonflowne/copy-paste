@@ -23,7 +23,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",
-      "https://copy-paste-frontend.vercel.app/"
+      "https://copy-paste-frontend.vercel.app"
     ],
     credentials: true
   })
@@ -38,7 +38,7 @@ const ioOptions: Partial<ServerOptions> = {
   cors: {
     origin: [
       "http://localhost:5173",
-      "https://copy-paste-frontend.vercel.app/"
+      "https://copy-paste-frontend.vercel.app"
     ],
     methods: ["GET", "POST"]
   }
