@@ -5,7 +5,6 @@ import { useEffect } from "react";
 const Authenticated = () => {
   const navigate = useNavigate();
   const { data, isPending, error } = useSession();
-  console.log(data)
   useEffect(() => {
     if (error) {
       navigate("/login");
