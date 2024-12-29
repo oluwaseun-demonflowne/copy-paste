@@ -60,7 +60,11 @@ exports.auth = (0, better_auth_1.betterAuth)({
         //    }
     },
     advanced: {
-        defaultCookieAttributes: { sameSite: "none", secure: true }
+        defaultCookieAttributes: {
+            httpOnly: true,
+            sameSite: "none",
+            secure: true
+        }
     },
     session: {
         expiresIn: 60 * 60 * 24 * 7, // 7 days
