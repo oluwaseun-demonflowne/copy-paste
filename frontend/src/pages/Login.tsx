@@ -1,13 +1,16 @@
 import { createAuthClient } from "better-auth/client";
 import { FcGoogle } from "react-icons/fc";
+import { useNavigate } from "react-router";
 
 const Login = () => {
   const authClient = createAuthClient();
+  const navigate = useNavigate();
   const signIn = async () => {
     const data = await authClient.signIn.social({
       provider: "google",
       fetchOptions: {
         credentials: "include",
+        
         baseURL:
           process.env.NODE_ENV === "production"
             ? "https://copy-paste-8sxg.onrender.com/api/auth"
@@ -15,6 +18,9 @@ const Login = () => {
         onError: (error) => {
           console.log("error hahah");
           console.log(error.error);
+        },
+        onSuccess: () => {
+          navigate("/");
         }
       }
     });
