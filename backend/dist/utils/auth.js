@@ -66,8 +66,8 @@ exports.auth = (0, better_auth_1.betterAuth)({
     advanced: {
         defaultCookieAttributes: {
             httpOnly: true,
-            sameSite: "none",
-            secure: true
+            sameSite: "None",
+            secure: true,
         }
     },
     session: {

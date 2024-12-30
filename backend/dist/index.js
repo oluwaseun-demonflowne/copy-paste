@@ -54,7 +54,8 @@ const PORT = process.env.PORT || 5001;
 app.use((0, cors_1.default)({
     origin: ["http://localhost:5173", "https://copy-paste-frontend.vercel.app"],
     credentials: true,
-    allowedHeaders: ["Content-Type", "Authorization"]
+    allowedHeaders: ["Content-Type", "Authorization"],
+    exposedHeaders: ['set-cookie']
 }));
 const server = http.createServer(app);
 app.all("/api/auth/*", (0, node_1.toNodeHandler)(auth_1.auth));
@@ -65,7 +66,8 @@ const ioOptions = {
         origin: ["http://localhost:5173", "https://copy-paste-frontend.vercel.app"],
         credentials: true,
         methods: ["GET", "POST"],
-        allowedHeaders: ["Content-Type", "Authorization"]
+        allowedHeaders: ["Content-Type", "Authorization"],
+        exposedHeaders: ['set-cookie']
     }
 };
 const io = new socket_io_1.Server(server, ioOptions);

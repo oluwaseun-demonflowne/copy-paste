@@ -23,7 +23,8 @@ app.use(
   cors({
     origin: ["http://localhost:5173", "https://copy-paste-frontend.vercel.app"],
     credentials: true,
-    allowedHeaders: ["Content-Type", "Authorization"]
+    allowedHeaders: ["Content-Type", "Authorization"],
+    exposedHeaders: ['set-cookie']
   })
 );
 
@@ -37,7 +38,8 @@ const ioOptions: Partial<ServerOptions> = {
     origin: ["http://localhost:5173", "https://copy-paste-frontend.vercel.app"],
     credentials: true,
     methods: ["GET", "POST"],
-    allowedHeaders: ["Content-Type", "Authorization"]
+    allowedHeaders: ["Content-Type", "Authorization"],
+    exposedHeaders: ['set-cookie']
   }
 };
 
