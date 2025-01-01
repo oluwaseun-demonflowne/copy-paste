@@ -9,7 +9,8 @@ export const new_online = (io: SocketIOServer, socket: Socket) => {
     if (!online_Users.some((user) => user.email === newEmail)) {
       online_Users.push({
         email: newEmail,
-        socketId: socket.id
+        socketId: socket.id,
+        socket: socket
       });
       io.emit(
         "get-users",
