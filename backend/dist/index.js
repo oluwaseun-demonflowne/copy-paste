@@ -47,6 +47,7 @@ const auth_1 = require("./utils/auth");
 const socketConfig_1 = require("./config/socketConfig");
 const corsConfig_1 = __importDefault(require("./config/corsConfig"));
 const online_controller_1 = require("./controllers/online-controller");
+const message_controller_1 = require("./controllers/message-controller");
 dotenv.config();
 const PORT = process.env.PORT || 5001;
 app.use((0, cors_1.default)(corsConfig_1.default));
@@ -59,7 +60,7 @@ app.get("/", (_req, res) => {
     res.send("Hello World!");
 });
 const onConnection = (socket) => {
-    (0, online_controller_1.new_online)(io, socket);
+    (0, online_controller_1.new_online)(io, socket), (0, message_controller_1.message)(io, socket);
 };
 io.on("connection", onConnection);
 server.listen(PORT, () => {

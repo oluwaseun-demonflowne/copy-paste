@@ -5,6 +5,19 @@ import App from "./App.tsx";
 import { BrowserRouter } from "react-router";
 import { SocketProvider } from "./providers/Socket.tsx";
 
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker
+      .register("/service-worker.js")
+      .then((registration) => {
+        console.log("ServiceWorker registered: ", registration);
+      })
+      .catch((registrationError) => {
+        console.error("ServiceWorker registration failed: ", registrationError);
+      });
+  });
+}
+
 createRoot(document.getElementById("root")!).render(
   <BrowserRouter>
     <SocketProvider>

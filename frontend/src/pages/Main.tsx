@@ -11,6 +11,7 @@ const Main = () => {
   const [socketIdServer, setSocketId] = useState("");
   const { socket } = useSocket();
   const buttonRef = useRef<HTMLButtonElement>(null);
+  // console.log("Service Worker supported:", "serviceWorker" in navigator);
 
   useEffect(() => {
     socket?.emit("new_text", text, data!.user!.email!, socket.id);
@@ -25,8 +26,23 @@ const Main = () => {
       console.log(socket.id, socketIdServer);
       if (socket.id === socketIdServer) return;
       setTimeout(() => {
-        buttonRef.current?.click();
+        if (navigator.serviceWorker.controller) {
+          buttonRef.current?.click();
+          navigator.serviceWorker.controller.postMessage({
+            action: "copyToClipboard",
+            text: texts
+          });
+        }
       }, 2000);
+
+      //   // buttonRef.current?.click();
+      //   if (navigator.serviceWorker.controller) {
+      //     navigator.serviceWorker.controller.postMessage({
+      //       action: "copyToClipboard",
+      //       text: texts
+      //     });
+      //   }
+      // }, 2000);
     });
   }, [socket]);
 
