@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useSession } from "../lib/auth-client";
 import { useSocket } from "../providers/Socket";
+import { BiClipboard } from "react-icons/bi";
+import { handleCopy } from "../utils/handleCopt";
 
 const Main = () => {
   const { data } = useSession();
@@ -29,17 +31,28 @@ const Main = () => {
       />
       <h3>{data?.user.email}</h3>
       <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-        <input
-          readOnly
-          value={socketText}
-          style={{
-            opacity: 0.4,
-            outline: "none",
-            height: "40px",
-            fontSize: "16px",
-            width: "290px"
-          }}
-        />
+        <div style={{ position: "relative" }}>
+          <input
+            readOnly
+            value={socketText}
+            style={{
+              opacity: 0.4,
+              outline: "none",
+              height: "40px",
+              fontSize: "16px",
+              width: "290px"
+            }}
+          />
+          <BiClipboard
+            onClick={() => handleCopy(socketText)}
+            style={{
+              fontSize: "20px",
+              position: "absolute",
+              top: 13,
+              right: 7
+            }}
+          />
+        </div>
         <input
           onChange={(e) => {
             setText(e.currentTarget.value);
