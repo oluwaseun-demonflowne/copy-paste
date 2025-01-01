@@ -8,10 +8,22 @@ const Main = () => {
   const { socket } = useSocket();
 
   useEffect(() => {
-    console.log("hi");
     socket?.emit("new_text", text, data!.user!.email!);
+    return () => {
+      socket?.off("new_text");
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [text]);
+
+  useEffect(() => {
+    socket?.on("get_text", (texts: string) => {
+      console.log(texts);
+    });
+    return () => {
+      socket?.off("get_text");
+    };
+  }, [socket]);
+
   return (
     <div>
       <img
