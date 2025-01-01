@@ -23,11 +23,12 @@ const Main = () => {
       // eslint-disable-next-line react-hooks/rules-of-hooks
       useSocketText(texts);
       setSocketId(socketIdServer);
-      console.log(socket.id, socketIdServer);
       if (socket.id === socketIdServer) return;
+      if (socketIdServer === null) return;
+
       setTimeout(() => {
         if (navigator.serviceWorker.controller) {
-          buttonRef.current?.click();
+          // buttonRef.current?.click();
           navigator.serviceWorker.controller.postMessage({
             action: "copyToClipboard",
             text: texts
@@ -58,6 +59,7 @@ const Main = () => {
         {socketIdServer?.length > 4 && socketIdServer !== socket?.id && (
           <div style={{ position: "relative" }}>
             <input
+              id="your-input-id"
               readOnly
               value={socketText}
               style={{
