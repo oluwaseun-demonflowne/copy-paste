@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSession } from "../lib/auth-client";
 import { useSocket } from "../providers/Socket";
 import { BiClipboard } from "react-icons/bi";
@@ -8,17 +8,25 @@ const Main = () => {
   const { data } = useSession();
   const [text, setText] = useState("");
   const [socketText, useSocketText] = useState("");
+  const [socketIdServer, setSocketId] = useState("");
   const { socket } = useSocket();
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    socket?.emit("new_text", text, data!.user!.email!);
+    socket?.emit("new_text", text, data!.user!.email!, socket.id);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [text]);
 
   useEffect(() => {
-    socket?.on("get_text", (texts: string) => {
+    socket?.on("get_text", (texts: string, socketIdServer: string) => {
       // eslint-disable-next-line react-hooks/rules-of-hooks
       useSocketText(texts);
+      setSocketId(socketIdServer);
+      console.log(socket.id, socketIdServer);
+      if (socket.id === socketIdServer) return;
+      setTimeout(() => {
+        buttonRef.current?.click();
+      }, 2000);
     });
   }, [socket]);
 
@@ -31,28 +39,36 @@ const Main = () => {
       />
       <h3>{data?.user.email}</h3>
       <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-        <div style={{ position: "relative" }}>
-          <input
-            readOnly
-            value={socketText}
-            style={{
-              opacity: 0.4,
-              outline: "none",
-              height: "40px",
-              fontSize: "16px",
-              width: "290px"
-            }}
-          />
-          <BiClipboard
-            onClick={() => handleCopy(socketText)}
-            style={{
-              fontSize: "20px",
-              position: "absolute",
-              top: 13,
-              right: 7
-            }}
-          />
-        </div>
+        {socketIdServer?.length > 4 && socketIdServer !== socket?.id && (
+          <div style={{ position: "relative" }}>
+            <input
+              readOnly
+              value={socketText}
+              style={{
+                opacity: 0.4,
+                outline: "none",
+                height: "40px",
+                fontSize: "16px",
+                width: "290px"
+              }}
+            />
+
+            <button
+              ref={buttonRef}
+              onClick={() => handleCopy(socketText)}
+              style={{
+                fontSize: "20px",
+                background: "transparent",
+                position: "absolute",
+                top: 1,
+                right: -10,
+                outline: "none",
+                border: 0
+              }}>
+              <BiClipboard />
+            </button>
+          </div>
+        )}
         <input
           onChange={(e) => {
             setText(e.currentTarget.value);
